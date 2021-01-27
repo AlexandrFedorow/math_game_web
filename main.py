@@ -30,6 +30,7 @@ def hello_world():
 
 @app.route('/main', methods=['GET'])
 def main():
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
     return render_template('main.html', ctr1=config.mix_des[0],
                                         ctr2=config.mix_des[1],
                                         ctr3=config.mix_des[2],
