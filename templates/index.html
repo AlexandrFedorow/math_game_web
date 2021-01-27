@@ -4,23 +4,15 @@
     <meta charset="UTF-8">
     <title>Hello</title>
 
-    <style type="text/css">
-    	.b{
-    		width: 100px;
-    		height: 100px;
-    		border-radius: 50px;
-    		background-color: #34eb98;
-    		text-align: center;
-    		font-size: 20px;
-    	}
-    	
-    </style>
+    <link href="insex_style.css" rel="stylesheet">
 </head>
 <body>
 	<center>
-<h1 class="hello">Hello</h1>
-<a href="{{ url_for('main') }}"><button class="b">Start</button></a>
-<p>The game is unstable, it may be shitty</p>
+<div class="main">
+    <h1 class="hh" class="hello">Hello</h1>
+    <a href="{{ url_for('main') }}"><button class="b">Start</button></a>
+    <p class="warning">The game is unstable, it may be shitty</p>
+</div>
 	</center>
 </body>
 </html>
