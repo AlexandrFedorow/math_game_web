@@ -16,26 +16,7 @@ class Expression:
         a1 = int(eval(task))
         a2 = int(a1 - 1)
         a3 = int(self.c - self.b + 4)
-        if self.a == self.c:
-            a4 = int(34 - self.a)
-        else:
-            a4 = int(self.b - self.c)
-
-        t = task.split()
-
-        if len(t) == 3:
-            if t[1] == '-':
-                a3 = int(eval(t[2] + t[1] + t[0]))
-
-        elif len(t) == 5:
-            if '*' in t:
-                a3 = int(eval(t[0] + t[3] + t[2] + t[1] + t[4]))
-
-                if t.index('*') == 1:
-                    a4 = int(eval(t[0] + t[1] + '(' + t[2] + t[3] + t[4] + ')'))
-
-                else:
-                    a4 = int(eval('(' + t[0] + t[1] + t[2] + ')' + t[3] + t[4]))
+        a4 = int(randint(a1-20, a1-1))
 
         return a1, a2, a3, a4
 
@@ -151,6 +132,7 @@ def create_level(game_lvl):
 
         return exeption
     else:
+        config.trig_chek = 0
         exeption = config.game.create_task_with_two_actions()
         return exeption
 
