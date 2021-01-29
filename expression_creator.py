@@ -9,6 +9,8 @@ class Expression:
         self.c = randint(1, 100)
 
         self.action = ['+', '-', '*', '/']
+        self.trig = ['sin', 'cos', 'tg', 'ctg']
+        self.angle = ['30', '45', '60']
 
     def decision(self, task):
         a1 = int(eval(task))
@@ -36,6 +38,52 @@ class Expression:
                     a4 = int(eval('(' + t[0] + t[1] + t[2] + ')' + t[3] + t[4]))
 
         return a1, a2, a3, a4
+
+    def trigonometry_decision(self, task):
+        may = ['1/2', '√2/2', '√3/2', '1', '√3', '√3/3']
+        ans = []
+        if 'sin' in task:
+            if '30' in task:
+                ans.append('1/2')
+            elif '45' in task:
+                ans.append('√2/2')
+            elif '60' in task:
+                ans.append('√3/2')
+
+        elif 'cos' in task:
+            if '30' in task:
+                ans.append('√3/2')
+            elif '45' in task:
+                ans.append('√2/2')
+            elif '60' in task:
+                ans.append('1/2')
+
+        elif 'tg' in task:
+            if '30' in task:
+                ans.append('√3/3')
+            elif '45' in task:
+                ans.append('1')
+            elif '60' in task:
+                ans.append('√3')
+
+        elif 'ctg' in task:
+            if '30' in task:
+                ans.append('√3')
+            elif '45' in task:
+                ans.append('1')
+            elif '60' in task:
+                ans.append('√3/3')
+
+        while len(ans) <= 3:
+            a = may[randint(0, len(may)-1)]
+            if a not in ans:
+                ans.append(a)
+
+        return ans
+
+    def trigonometry_task(self):
+        ex = self.trig[randint(0, 3)] + '(' + self.angle[randint(0, 2)] + ')'
+        return ex
 
     def create_task_with_one_action(self):
         self.a = randint(1, 100)
@@ -92,16 +140,26 @@ def create_level(game_lvl):
     config.game = Expression()
 
     if game_lvl <= 10:
-        exeption = config.game.create_task_with_one_action()
+        check = randint(0, 1)
+
+        if check == 0:
+            exeption = config.game.create_task_with_one_action()
+            config.trig_chek = 0
+        else:
+            exeption = config.game.trigonometry_task()
+            config.trig_chek = 1
+
         return exeption
     else:
         exeption = config.game.create_task_with_two_actions()
         return exeption
 
 
-
 def descision(task):
-    ans = list(config.game.decision(task))
+    if config.trig_chek == 0:
+        ans = list(config.game.decision(task))
+    else:
+        ans = config.game.trigonometry_decision(task)
     return ans, ans[0]
 
 

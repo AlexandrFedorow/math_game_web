@@ -5,3 +5,4 @@ a = 0
 e = ''
 lvl = 1
 des = []
+trig_chek = 0
