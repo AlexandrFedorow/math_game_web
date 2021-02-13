@@ -7,6 +7,6 @@ Libraries list:
     - render_template
     - redirect
     - url_for
-    -request
+    - request
     - session
 - Random
