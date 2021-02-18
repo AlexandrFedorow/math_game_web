@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Welcom</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='check_in_style.css')}}">
+</head>
+
+<body>
+
+<div class="m">
+	<div class="shap"><h2>Sing in</h2></div>
+
+	<div class="main">
+		<br>
+		<br>
+		<form class="forms" method="post" action="">
+			<input id="email" type="text" class="form" placeholder="Name" name="username">
+			<input id="name" type="password" class="form" placeholder="Password" name="password">
+			<br><br>
+			
+			<input class="bt" type="submit" value="Start">
+		</form>
+	</div>
+	<div class="error"><p>{{ message }}</p></div>
+</div>
+</body>
+</html>

@@ -22,7 +22,15 @@
 }
 .a{
     width: 500px;
-    height: 45px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.lider{
+    width: 400px;
+    height: 200px;
+    background-color: red;
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px){

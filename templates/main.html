@@ -34,7 +34,16 @@
 
 </div>
 </center>
+<center>
+    <div class="lider">
+        <ul>
+            {% for lider in lider_list %}
 
+                <li>{{ lider[0] }} {{ lider[1] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</center>
 
 </body>
 </html>
