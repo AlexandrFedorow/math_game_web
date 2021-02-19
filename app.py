@@ -54,14 +54,11 @@ def login():
         password_again = request.form.get('password_again')
         line = Users.query.filter_by(name=username).all()
 
-    if password != password_again or password == '' and password_again == '':
-        return render_template('login.html', message='Passwords do not match')
+    if password != password_again:
+        return render_template('checkin.html', message='Passwords do not match')
 
     elif len(line) != 0:
-        return render_template('login.html', message='Nickname is already in use')
-
-    elif username == '':
-        return render_template('login.html', message='You have not entered a nickname')
+        return render_template('checkin.html', message='Nickname is already in use')
 
     elif len(line) == 0 and username != '' and password != '' and password_again != '' and password == password_again:
         session['user'] = username
@@ -84,7 +81,7 @@ def login():
                                         exp=config.e,
                                         lvl=1)
 
-    return render_template('login.html')
+    return render_template('checkin.html')
 
 
 @app.route('/sing_in', methods=['post', 'get'])
