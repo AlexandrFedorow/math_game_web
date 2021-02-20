@@ -123,10 +123,10 @@ def create_level(game_lvl):
     if game_lvl <= 10:
         check = randint(0, 1)
 
-        if check == 0:
+        if check == 0 or game_lvl < 10:
             exeption = config.game.create_task_with_one_action()
             config.trig_chek = 0
-        else:
+        elif check == 1 and game_lvl >= 10:
             exeption = config.game.trigonometry_task()
             config.trig_chek = 1
 

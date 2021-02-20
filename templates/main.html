@@ -38,8 +38,7 @@
     <div class="lider">
         <ul>
             {% for lider in lider_list %}
-
-                <li>{{ lider[0] }} {{ lider[1] }}</li>
+                <li>{{ lider.name }} {{ lider.lvl }}</li>
             {% endfor %}
         </ul>
     </div>

@@ -1,5 +1,4 @@
 import random
-import config
 import expression_creator
 from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
@@ -23,14 +22,14 @@ class Users(db.Model):
 
 
 def mixing():
-    config.mix_des = config.des
-    random.shuffle(config.mix_des)
+    #config.mix_des = config.des
+    random.shuffle(session['description'])
 
 
 def check(c):
     line = Users.query.filter_by(name=session['user']).all()
 
-    if config.a == config.mix_des[c]:
+    if session['answer'] == session['description'][c]:
         session['lvl'] += 1
 
     else:
@@ -71,15 +70,17 @@ def login():
         except:
             return 'error'
 
-        config.e = expression_creator.create_level(1)
-        config.des, config.a = expression_creator.descision(config.e)
+        session['expression'] = expression_creator.create_level(session['lvl'])
+        session['description'], session['answer'] = expression_creator.descision(session['expression'])
         mixing()
-        return render_template('main.html', ctr1=config.mix_des[0],
-                                        ctr2=config.mix_des[1],
-                                        ctr3=config.mix_des[2],
-                                        ctr4=config.mix_des[3],
-                                        exp=config.e,
-                                        lvl=1)
+        line = Users.query.order_by(Users.lvl.desc()).limit(10)
+        return render_template('main.html', ctr1=session['description'][0],
+                               ctr2=session['description'][1],
+                               ctr3=session['description'][2],
+                               ctr4=session['description'][3],
+                               exp=session['expression'],
+                               lvl=session['lvl'],
+                               lider_list=line)
 
     return render_template('checkin.html')
 
@@ -102,39 +103,40 @@ def sing_in():
             session['lvl'] = int(line[0].lvl)
             session['user'] = username
 
-            config.e = expression_creator.create_level(session['lvl'])
-            config.des, config.a = expression_creator.descision(config.e)
+            session['expression'] = expression_creator.create_level(session['lvl'])
+            session['description'], session['answer'] = expression_creator.descision(session['expression'])
             mixing()
+            line = Users.query.order_by(Users.lvl.desc()).limit(10)
 
-            return render_template('main.html', ctr1=config.mix_des[0],
-                                   ctr2=config.mix_des[1],
-                                   ctr3=config.mix_des[2],
-                                   ctr4=config.mix_des[3],
-                                   exp=config.e,
-                                   lvl=session['lvl'])
+            return render_template('main.html', ctr1=session['description'][0],
+                                   ctr2=session['description'][1],
+                                   ctr3=session['description'][2],
+                                   ctr4=session['description'][3],
+                                   exp=session['expression'],
+                                   lvl=session['lvl'],
+                                   lider_list=line)
 
     return render_template('sing_in.html')
 
 
 @app.route('/main', methods=['GET'])
 def main():
-
-    line = line = Users.query.filter_by(name='jaja').all()
+    line = Users.query.order_by(Users.lvl.desc()).limit(10)
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-    return render_template('main.html', ctr1=config.mix_des[0],
-                                        ctr2=config.mix_des[1],
-                                        ctr3=config.mix_des[2],
-                                        ctr4=config.mix_des[3],
-                                        exp=config.e,
-                                        lvl=session['lvl'],
-                                        lider_list=line)
+    return render_template('main.html', ctr1=session['description'][0],
+                           ctr2=session['description'][1],
+                           ctr3=session['description'][2],
+                           ctr4=session['description'][3],
+                           exp=session['expression'],
+                           lvl=session['lvl'],
+                           lider_list=line)
 
 
 @app.route('/add_ans1', methods=['POST'])
 def give_ans1():
     check(0)
-    config.e = expression_creator.create_level(session['lvl'])
-    config.des, config.a = expression_creator.descision(config.e)
+    session['expression'] = expression_creator.create_level(session['lvl'])
+    session['description'], session['answer'] = expression_creator.descision(session['expression'])
     mixing()
     return redirect(url_for('main'))
 
@@ -142,8 +144,8 @@ def give_ans1():
 @app.route('/add_ans2', methods=['POST'])
 def give_ans2():
     check(1)
-    config.e = expression_creator.create_level(session['lvl'])
-    config.des, config.a = expression_creator.descision(config.e)
+    session['expression'] = expression_creator.create_level(session['lvl'])
+    session['description'], session['answer'] = expression_creator.descision(session['expression'])
     mixing()
     return redirect(url_for('main'))
 
@@ -151,8 +153,8 @@ def give_ans2():
 @app.route('/add_ans3', methods=['POST'])
 def give_ans3():
     check(2)
-    config.e = expression_creator.create_level(session['lvl'])
-    config.des, config.a = expression_creator.descision(config.e)
+    session['expression'] = expression_creator.create_level(session['lvl'])
+    session['description'], session['answer'] = expression_creator.descision(session['expression'])
     mixing()
     return redirect(url_for('main'))
 
@@ -160,8 +162,8 @@ def give_ans3():
 @app.route('/add_ans4', methods=['POST'])
 def give_ans4():
     check(3)
-    config.e = expression_creator.create_level(session['lvl'])
-    config.des, config.a = expression_creator.descision(config.e)
+    session['expression'] = expression_creator.create_level(session['lvl'])
+    session['description'], session['answer'] = expression_creator.descision(session['expression'])
     mixing()
     return redirect(url_for('main'))
 
