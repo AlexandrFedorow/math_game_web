@@ -22,7 +22,6 @@ class Users(db.Model):
 
 
 def mixing():
-    #config.mix_des = config.des
     random.shuffle(session['description'])
 
 
@@ -87,9 +86,7 @@ def login():
 
 @app.route('/sing_in', methods=['post', 'get'])
 def sing_in():
-    username = ''
-    password = ''
-    line = []
+
     if request.method == 'POST':
 
         username = request.form.get('username')  # запрос к данным формы

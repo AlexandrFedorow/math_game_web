@@ -10,7 +10,7 @@ class Expression:
 
         self.action = ['+', '-', '*', '/']
         self.trig = ['sin', 'cos', 'tg', 'ctg']
-        self.angle = ['30', '45', '60']
+        self.angle = ['30', '45', '60'] # °
 
     def decision(self, task):
         a1 = int(eval(task))

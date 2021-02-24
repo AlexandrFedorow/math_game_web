@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <title>Welcom</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='check_in_style.css')}}">
+
 </head>
 
 <body>
 
 <div class="m">
-	<div class="shap"><h2>Log in</h2></div>
+	<div class="shap"><h1>Log in</h1></div>
 
 	<div class="main">
 		<br>
@@ -18,9 +19,9 @@
 			<input id="email" type="text" class="form" placeholder="Name" name="username">
 			<input id="name" type="password" class="form" placeholder="Password" name="password">
 			<br><br>
-			
+
 			<input class="bt" type="submit" value="Start">
-			<a href="/">Back</a>
+			<a class="ss" href="/">Back</a>
 		</form>
 	</div>
 	<div class="error"><p>{{ message }}</p></div>
