@@ -94,7 +94,7 @@ def sing_in():
         line = Users.query.filter_by(name=username).all()
 
         if len(line) != 1 or line[0].password != password or username == '' or password == '':
-            return render_template('sing_in.html', message='Error')
+            return render_template('login.html', message='Error')
         else:
 
             session['lvl'] = int(line[0].lvl)
@@ -113,7 +113,7 @@ def sing_in():
                                    lvl=session['lvl'],
                                    lider_list=line)
 
-    return render_template('sing_in.html')
+    return render_template('login.html')
 
 
 @app.route('/main', methods=['GET'])

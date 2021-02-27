@@ -10,7 +10,7 @@ class Expression:
 
         self.action = ['+', '-', '*', '/']
         self.trig = ['sin', 'cos', 'tg', 'ctg']
-        self.angle = ['30', '45', '60'] # °
+        self.angle = ['30°', '45°', '60°'] # °
 
     def decision(self, task):
         a1 = int(eval(task))
@@ -24,35 +24,35 @@ class Expression:
         may = ['1/2', '√2/2', '√3/2', '1', '√3', '√3/3']
         ans = []
         if 'sin' in task:
-            if '30' in task:
+            if '30°' in task:
                 ans.append('1/2')
-            elif '45' in task:
+            elif '45°' in task:
                 ans.append('√2/2')
-            elif '60' in task:
+            elif '60°' in task:
                 ans.append('√3/2')
 
         elif 'cos' in task:
-            if '30' in task:
+            if '30°' in task:
                 ans.append('√3/2')
-            elif '45' in task:
+            elif '45°' in task:
                 ans.append('√2/2')
-            elif '60' in task:
+            elif '60°' in task:
                 ans.append('1/2')
 
         elif 'tg' in task:
-            if '30' in task:
+            if '30°' in task:
                 ans.append('√3/3')
-            elif '45' in task:
+            elif '45°' in task:
                 ans.append('1')
-            elif '60' in task:
+            elif '60°' in task:
                 ans.append('√3')
 
         elif 'ctg' in task:
-            if '30' in task:
+            if '30°' in task:
                 ans.append('√3')
-            elif '45' in task:
+            elif '45°' in task:
                 ans.append('1')
-            elif '60' in task:
+            elif '60°' in task:
                 ans.append('√3/3')
 
         while len(ans) <= 3:
