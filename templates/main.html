@@ -36,11 +36,18 @@
 </center>
 <center>
     <div class="lider">
-        <ul>
+        <table class="lid_table" border="1">
+                <tr class="table_shap">
+                    <td>Name</td>
+                    <td>LVL</td>
+                </tr>
             {% for lider in lider_list %}
-                <li>{{ lider.name }} {{ lider.lvl }}</li>
+                <tr>
+                    <td>{{ lider.name }}</td>
+                    <td>{{ lider.lvl }}</td>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     </div>
 </center>
 

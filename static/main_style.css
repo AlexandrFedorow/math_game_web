@@ -30,7 +30,17 @@
 .lider{
     width: 400px;
     height: 200px;
-    background-color: red;
+    font-size: 20px;
+}
+.lid_table{
+    max-width: 200px;
+}
+.table_shap{
+     background-color: #2da260;
+     color: #ffffff;
+}
+td{
+    text-align: center;
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px){
@@ -63,12 +73,27 @@
 }
 .num_lvl{
     margin-left: auto;
-    margin-right: auto; 
+    margin-right: auto;
 }
 .c{
     height: 120px;
 }
 .content{
     margin-top: 30%;
+}
+.lider{
+    margin-top: 45%;
+    width: 400px;
+    height: 200px;
+    font-size: 20px;
+}
+.lid_table{
+    max-width: 500px;
+    width: 400px;
+    font-size: 40px;
+}
+.table_shap{
+    background-color: #2da260;
+    color: #ffffff;
 }
 }
