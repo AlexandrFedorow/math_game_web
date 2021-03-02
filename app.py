@@ -1,4 +1,5 @@
 import random
+import re
 import expression_creator
 from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
@@ -8,6 +9,7 @@ app.secret_key = 'hello'
 
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+valid_pattern = re.compile(r"^[a-z0-9]+$", re.I)
 db = SQLAlchemy(app)
 
 
@@ -19,6 +21,10 @@ class Users(db.Model):
 
     def __repr__(self):
         return '<Users %r' % self.id
+
+
+def validate(name):
+    return bool(valid_pattern.match(name))
 
 
 def mixing():
@@ -55,8 +61,23 @@ def login():
     if password != password_again:
         return render_template('checkin.html', message='Passwords do not match')
 
+    elif len(password) < 3 and len(password) != 0:
+        return render_template('checkin.html', message='Password is too short')
+
+    elif ' ' in password:
+        return render_template('checkin.html', message='Must be no spaces in the password')
+
     elif len(line) != 0:
         return render_template('checkin.html', message='Nickname is already in use')
+
+    elif len(username) > 16:
+        return render_template('checkin.html', message='Nickname is too long')
+
+    elif len(username) < 3 and len(username) != 0:
+        return render_template('checkin.html', message='Nickname is too short')
+
+    elif not validate(username) and len(username) != 0:
+        return render_template('checkin.html', message='Use only numbers and letters')
 
     elif len(line) == 0 and username != '' and password != '' and password_again != '' and password == password_again:
         session['user'] = username
@@ -72,7 +93,8 @@ def login():
         session['expression'] = expression_creator.create_level(session['lvl'])
         session['description'], session['answer'] = expression_creator.descision(session['expression'])
         mixing()
-        line = Users.query.order_by(Users.lvl.desc()).limit(10)
+        line = Users.query.order_by(Users.lvl.desc()).limit(5)
+
         return render_template('main.html', ctr1=session['description'][0],
                                ctr2=session['description'][1],
                                ctr3=session['description'][2],
@@ -103,7 +125,7 @@ def sing_in():
             session['expression'] = expression_creator.create_level(session['lvl'])
             session['description'], session['answer'] = expression_creator.descision(session['expression'])
             mixing()
-            line = Users.query.order_by(Users.lvl.desc()).limit(10)
+            line = Users.query.order_by(Users.lvl.desc()).limit(5)
 
             return render_template('main.html', ctr1=session['description'][0],
                                    ctr2=session['description'][1],
@@ -118,7 +140,7 @@ def sing_in():
 
 @app.route('/main', methods=['GET'])
 def main():
-    line = Users.query.order_by(Users.lvl.desc()).limit(10)
+    line = Users.query.order_by(Users.lvl.desc()).limit(5)
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
     return render_template('main.html', ctr1=session['description'][0],
                            ctr2=session['description'][1],
@@ -165,4 +187,4 @@ def give_ans4():
     return redirect(url_for('main'))
 
 
-app.run()
+app.run(host="0.0.0.0", port=5000)
