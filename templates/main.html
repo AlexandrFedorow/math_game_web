@@ -6,50 +6,46 @@
      <link rel="stylesheet" href="{{ url_for( 'static', filename='main_style.css')}}">
 </head>
 <body>
-<center>
-
-<div class="content">
-<div class="lvl"><div class="c"></div><div class="num_lvl">{{ lvl }}</div></div><br>
-<div class="ex">{{exp}}</div>
-
-<br>
-
-<div class="a">
-<form class="f" method="post" action="/add_ans1">
-    <button class="b" type="submit">{{ ctr1 }}</button>
-</form>
-<br>
-<form class="f" method="post" action="/add_ans2">
-    <button class="b" type="submit">{{ ctr2 }}</button>
-</form>
-<br>
-<form class="f" method="post" action="/add_ans3">
-    <button class="b" type="submit">{{ ctr3 }}</button>
-</form>
-<br>
-<form class="f" method="post" action="/add_ans4">
-    <button class="b" type="submit">{{ ctr4 }}</button>
-</form>
-</div>
-
-</div>
-</center>
-<center>
-    <div class="lider">
-        <table class="lid_table" border="1">
-                <tr class="table_shap">
-                    <td>Name</td>
-                    <td>LVL</td>
-                </tr>
-            {% for lider in lider_list %}
-                <tr>
-                    <td>{{ lider.name }}</td>
-                    <td>{{ lider.lvl }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    </div>
-</center>
+    <center>
+        <div class="content">
+                <div class="lvl"><div class="c"></div><div class="num_lvl">{{ lvl }}</div></div><br>
+            <div class="ex">{{exp}}</div>
+        <br>
+            <div class="a">
+                <form class="f" method="post" action="/add_ans1">
+                    <button class="b" type="submit">{{ ctr1 }}</button>
+                </form>
+            <br>
+                <form class="f" method="post" action="/add_ans2">
+                    <button class="b" type="submit">{{ ctr2 }}</button>
+                </form>
+            <br>
+                <form class="f" method="post" action="/add_ans3">
+                    <button class="b" type="submit">{{ ctr3 }}</button>
+                </form>
+            <br>
+                <form class="f" method="post" action="/add_ans4">
+                    <button class="b" type="submit">{{ ctr4 }}</button>
+                </form>
+            </div>
+        </div>
+    </center>
+    <center>
+        <div class="lider">
+            <table class="lid_table" border="1">
+                    <tr class="table_shap">
+                        <td>Name</td>
+                        <td>LVL</td>
+                    </tr>
+                {% for lider in lider_list %}
+                    <tr>
+                        <td>{{ lider.name }}</td>
+                        <td>{{ lider.lvl }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </center>
 
 </body>
 </html>

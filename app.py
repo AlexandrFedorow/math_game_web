@@ -3,13 +3,15 @@ import re
 import expression_creator
 from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
+#from flask_admin import Admin
+#from flask_admin.contrib.sqla import ModelView
 
 app = Flask(__name__)
 app.secret_key = 'hello'
 
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-valid_pattern = re.compile(r"^[a-z0-9]+$", re.I)
+valid_pattern = re.compile(r"^[0-9a-fA-F]{5,20}$", re.I)
 db = SQLAlchemy(app)
 
 
@@ -21,6 +23,10 @@ class Users(db.Model):
 
     def __repr__(self):
         return '<Users %r' % self.id
+
+
+#admin = Admin(app)
+#admin.add_view(ModelView(Users, db.session))
 
 
 def validate(name):
@@ -70,14 +76,8 @@ def login():
     elif len(line) != 0:
         return render_template('checkin.html', message='Nickname is already in use')
 
-    elif len(username) > 16:
-        return render_template('checkin.html', message='Nickname is too long')
-
-    elif len(username) < 3 and len(username) != 0:
-        return render_template('checkin.html', message='Nickname is too short')
-
     elif not validate(username) and len(username) != 0:
-        return render_template('checkin.html', message='Use only numbers and letters')
+        return render_template('checkin.html', message='Incorrect nickname')
 
     elif len(line) == 0 and username != '' and password != '' and password_again != '' and password == password_again:
         session['user'] = username

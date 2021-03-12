@@ -10,7 +10,7 @@ class Expression:
 
         self.action = ['+', '-', '*', '/']
         self.trig = ['sin', 'cos', 'tg', 'ctg']
-        self.angle = ['30°', '45°', '60°'] # °
+        self.angle = ['30°', '45°', '60°']
 
     def decision(self, task):
         a1 = int(eval(task))
@@ -121,20 +121,18 @@ def create_level(game_lvl):
     config.game = Expression()
 
     if game_lvl <= 10:
-        check = randint(0, 1)
+        exeption = config.game.create_task_with_one_action()
+        config.trig_chek = 0
 
-        if check == 0 or game_lvl < 10:
-            exeption = config.game.create_task_with_one_action()
-            config.trig_chek = 0
-        elif check == 1 and game_lvl >= 10:
-            exeption = config.game.trigonometry_task()
-            config.trig_chek = 1
+    elif game_lvl % 10 == 0:
+        exeption = config.game.trigonometry_task()
+        config.trig_chek = 1
 
-        return exeption
     else:
         config.trig_chek = 0
         exeption = config.game.create_task_with_two_actions()
-        return exeption
+
+    return exeption
 
 
 def descision(task):

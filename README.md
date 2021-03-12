@@ -11,3 +11,10 @@ Libraries list:
     - session
 - Random
 - re
+- flask_sqlalchemy
+
+Installation:
+- Flask:
+``pip3 install flask``
+- flask_sqlalchemy: ``pip3 install flask-sqlalchemy``
+
