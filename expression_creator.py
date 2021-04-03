@@ -120,7 +120,7 @@ class Expression:
 def create_level(game_lvl):
     config.game = Expression()
 
-    if game_lvl <= 10:
+    if game_lvl <= 10 or game_lvl % 3 == 0:
         exeption = config.game.create_task_with_one_action()
         config.trig_chek = 0
 

@@ -3,6 +3,8 @@ import re
 import expression_creator
 from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager
 #from flask_admin import Admin
 #from flask_admin.contrib.sqla import ModelView
 
@@ -11,8 +13,10 @@ app.secret_key = 'hello'
 
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-valid_pattern = re.compile(r"^[0-9a-fA-F]{5,20}$", re.I)
+valid_pattern = re.compile(r"^[0-9a-zA-Z]{5,20}$", re.I)
 db = SQLAlchemy(app)
+
+
 
 
 class Users(db.Model):
@@ -52,7 +56,7 @@ def check(c):
 
 
 @app.route('/', methods=['post', 'get'])
-def login():
+def login():# тут происходит регистрация пользователя
     username = ''
     password = ''
     password_again = ''
@@ -82,7 +86,7 @@ def login():
     elif len(line) == 0 and username != '' and password != '' and password_again != '' and password == password_again:
         session['user'] = username
         session['lvl'] = 1
-        user = Users(name=username, password=password)
+        user = Users(name=username, password=generate_password_hash(password))
 
         try:
             db.session.add(user)
@@ -107,7 +111,7 @@ def login():
 
 
 @app.route('/sing_in', methods=['post', 'get'])
-def sing_in():
+def sing_in():#тут происходит вход поьзователя
 
     if request.method == 'POST':
 
@@ -115,7 +119,7 @@ def sing_in():
         password = request.form.get('password')
         line = Users.query.filter_by(name=username).all()
 
-        if len(line) != 1 or line[0].password != password or username == '' or password == '':
+        if len(line) != 1 or not(check_password_hash(line[0].password, password)) or username == '' or password == '':#check_password_hash(self.password_hash, password)
             return render_template('login.html', message='Error')
         else:
 
