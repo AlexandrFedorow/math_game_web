@@ -13,6 +13,7 @@
     font-size: 20px;
     background-color: #7d74f2;
     text-align: center;
+    border-radius: 50px;
 }
 .b{
     width: 150px;
@@ -20,12 +21,14 @@
     font-size: 20px;
     background-color: #7d74f2;
     color: #eee3fc;
+    text-align: center;
 }
 .a{
     width: 500px;
     height: 250px;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 50px;
 }
 
 .lider{
