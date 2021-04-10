@@ -13,12 +13,16 @@ class Expression:
         self.angle = ['30°', '45°', '60°']
 
     def decision(self, task):
-        a1 = int(eval(task))
-        a2 = int(a1 - 1)
-        a3 = int(self.c - self.b + 4)
-        a4 = int(randint(a1-20, a1-1))
+         a1 = int(eval(task))
+         a2 = int(a1 - 1)
+         a3 = int(self.c - self.b + 4)
+         if (a1 == a3) or (a2 == a3):
+             a3 = int(randint(a1 +2, a1 + 4))
+         a4 = int(randint(a1-20, a1-1))
+         if (a1 == a4) or (a2 == a4) or (a3 == a4):
+             a4 = int(randint(a1 + 5, a1 + 10))
 
-        return a1, a2, a3, a4
+         return a1, a2, a3, a4
 
     def trigonometry_decision(self, task):
         may = ['1/2', '√2/2', '√3/2', '1', '√3', '√3/3']
