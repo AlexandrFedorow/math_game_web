@@ -71,7 +71,7 @@ def login():# тут происходит регистрация пользов�
     if password != password_again:
         return render_template('checkin.html', message='Passwords do not match')
 
-    elif len(password) < 3 and len(password) != 0:
+    elif len(password) < 5 and len(password) != 0:
         return render_template('checkin.html', message='Password is too short')
 
     elif ' ' in password:
@@ -191,4 +191,4 @@ def give_ans4():
     return redirect(url_for('main'))
 
 
-app.run(host="0.0.0.0", port=5000)
+app.run()
