@@ -7,33 +7,48 @@
 </head>
 <body style = "background-color: #3675D3">
     <center>
-        <div class="content" >
-                <div class="lvl" border = "4" style = "background-color:white; border-color:#0C4AA6"><div class="c" ></div><div class="num_lvl">{{ lvl }}</div></div><br>
-            <div class="ex" border = "4" style = "background-color:white; border-color:#0C4AA6">{{exp}}</div>
+        <div class="content">
+                <div class="lvl"><div class="c"></div><div class="num_lvl">{{ lvl }}</div></div><br>
+            <div class="ex">{{exp}}</div>
+            <progress id="progres" max="100" value="0"></progress>
         <br>
             <div class="a">
                 <form class="f" method="post" action="/add_ans1">
-                    <button class="b" border="4" type="submit" style = "background-color: #0066FF; border-color: white">{{ ctr1 }}</button>
+                    <button class="b" type="submit">{{ ctr1 }}</button>
                 </form>
             <br>
                 <form class="f" method="post" action="/add_ans2">
-                    <button class="b"  border="4"type="submit" style = "background-color: #0066FF; border-color: white">{{ ctr2 }}</button>
+                    <button class="b" type="submit">{{ ctr2 }}</button>
                 </form>
             <br>
                 <form class="f" method="post" action="/add_ans3">
-                    <button class="b" border="10" type="submit" style = "background-color: #0066FF; border-color: white">{{ ctr3 }}</button>
+                    <button class="b" type="submit">{{ ctr3 }}</button>
                 </form>
             <br>
                 <form class="f" method="post" action="/add_ans4">
-                    <button class="b" border="4" type="submit" style = "background-color: #0066FF; border-color: white">{{ ctr4 }}</button>
+                    <button class="b" type="submit">{{ ctr4 }}</button>
                 </form>
             </div>
         </div>
+        <script type="text/javascript">
+      function increase(){
+        var pr = document.getElementById("progres");
+        if(pr.value < 100){
+          pr.value += 20;
+        }
+        else{
+          window.location.reload(false);
+        }
+
+      }
+      setInterval(increase, 1000);
+
+  </script>
     </center>
     <center>
         <div class="lider">
-            <table class="lid_table" border="4" style="color:white; background-color:#0066FF;  border-color:white">
-                    <tr class="table_shap" style = "background-color: white; color:#1865D8">
+            <table class="lid_table" border="1">
+                    <tr class="table_shap">
                         <td>Name</td>
                         <td>LVL</td>
                     </tr>
@@ -45,7 +60,6 @@
                 {% endfor %}
             </table>
         </div>
-
     </center>
 
 </body>

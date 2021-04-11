@@ -5,18 +5,13 @@ from flask import Flask, render_template, redirect, url_for, request, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
-#from flask_admin import Admin
-#from flask_admin.contrib.sqla import ModelView
-
 app = Flask(__name__)
-app.secret_key = 'hello'
+app.secret_key = 'helloooo'
 
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 valid_pattern = re.compile(r"^[0-9a-zA-Z]{5,20}$", re.I)
 db = SQLAlchemy(app)
-
-
 
 
 class Users(db.Model):
@@ -27,10 +22,6 @@ class Users(db.Model):
 
     def __repr__(self):
         return '<Users %r' % self.id
-
-
-#admin = Admin(app)
-#admin.add_view(ModelView(Users, db.session))
 
 
 def validate(name):
@@ -94,18 +85,7 @@ def login():# тут происходит регистрация пользов�
         except:
             return 'error'
 
-        session['expression'] = expression_creator.create_level(session['lvl'])
-        session['description'], session['answer'] = expression_creator.descision(session['expression'])
-        mixing()
-        line = Users.query.order_by(Users.lvl.desc()).limit(5)
-
-        return render_template('main.html', ctr1=session['description'][0],
-                               ctr2=session['description'][1],
-                               ctr3=session['description'][2],
-                               ctr4=session['description'][3],
-                               exp=session['expression'],
-                               lvl=session['lvl'],
-                               lider_list=line)
+        return redirect(url_for('main'))
 
     return render_template('checkin.html')
 
@@ -126,18 +106,7 @@ def sing_in():#тут происходит вход поьзователя
             session['lvl'] = int(line[0].lvl)
             session['user'] = username
 
-            session['expression'] = expression_creator.create_level(session['lvl'])
-            session['description'], session['answer'] = expression_creator.descision(session['expression'])
-            mixing()
-            line = Users.query.order_by(Users.lvl.desc()).limit(5)
-
-            return render_template('main.html', ctr1=session['description'][0],
-                                   ctr2=session['description'][1],
-                                   ctr3=session['description'][2],
-                                   ctr4=session['description'][3],
-                                   exp=session['expression'],
-                                   lvl=session['lvl'],
-                                   lider_list=line)
+            return redirect(url_for('main'))
 
     return render_template('login.html')
 
@@ -146,6 +115,11 @@ def sing_in():#тут происходит вход поьзователя
 def main():
     line = Users.query.order_by(Users.lvl.desc()).limit(5)
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+    session['expression'] = expression_creator.create_level(session['lvl'])
+    session['description'], session['answer'] = expression_creator.descision(session['expression'])
+    mixing()
+    #вхерачить чек с праметром с = 5
+    #но добавить условие (если чел только зайдет и у него будет счет то произойдет -1)
     return render_template('main.html', ctr1=session['description'][0],
                            ctr2=session['description'][1],
                            ctr3=session['description'][2],
@@ -191,4 +165,4 @@ def give_ans4():
     return redirect(url_for('main'))
 
 
-app.run()
+app.run(host='0.0.0.0', port=5000)
