@@ -124,11 +124,11 @@ class Expression:
 def create_level(game_lvl):
     config.game = Expression()
 
-    if game_lvl <= 10 or game_lvl % 3 == 0:
+    if game_lvl < 10 or game_lvl % 3 == 0:
         exeption = config.game.create_task_with_one_action()
         config.trig_chek = 0
 
-    elif game_lvl % 10 == 0:
+    elif game_lvl >= 10  and game_lvl % 5 == 0:
         exeption = config.game.trigonometry_task()
         config.trig_chek = 1
 
@@ -145,6 +145,3 @@ def descision(task):
     else:
         ans = config.game.trigonometry_decision(task)
     return ans, ans[0]
-
-
-

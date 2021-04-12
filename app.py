@@ -118,8 +118,6 @@ def main():
     session['expression'] = expression_creator.create_level(session['lvl'])
     session['description'], session['answer'] = expression_creator.descision(session['expression'])
     mixing()
-    #вхерачить чек с праметром с = 5
-    #но добавить условие (если чел только зайдет и у него будет счет то произойдет -1)
     return render_template('main.html', ctr1=session['description'][0],
                            ctr2=session['description'][1],
                            ctr3=session['description'][2],
@@ -132,36 +130,24 @@ def main():
 @app.route('/add_ans1', methods=['POST'])
 def give_ans1():
     check(0)
-    session['expression'] = expression_creator.create_level(session['lvl'])
-    session['description'], session['answer'] = expression_creator.descision(session['expression'])
-    mixing()
     return redirect(url_for('main'))
 
 
 @app.route('/add_ans2', methods=['POST'])
 def give_ans2():
     check(1)
-    session['expression'] = expression_creator.create_level(session['lvl'])
-    session['description'], session['answer'] = expression_creator.descision(session['expression'])
-    mixing()
     return redirect(url_for('main'))
 
 
 @app.route('/add_ans3', methods=['POST'])
 def give_ans3():
     check(2)
-    session['expression'] = expression_creator.create_level(session['lvl'])
-    session['description'], session['answer'] = expression_creator.descision(session['expression'])
-    mixing()
     return redirect(url_for('main'))
 
 
 @app.route('/add_ans4', methods=['POST'])
 def give_ans4():
     check(3)
-    session['expression'] = expression_creator.create_level(session['lvl'])
-    session['description'], session['answer'] = expression_creator.descision(session['expression'])
-    mixing()
     return redirect(url_for('main'))
 
 
