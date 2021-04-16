@@ -151,4 +151,4 @@ def give_ans4():
     return redirect(url_for('main'))
 
 
-app.run(host='0.0.0.0', port=5000)
+app.run()
