@@ -138,7 +138,6 @@ def create_level(game_lvl):
 
     return exeption
 
-
 def descision(task):
     if config.trig_chek == 0:
         ans = list(config.game.decision(task))
