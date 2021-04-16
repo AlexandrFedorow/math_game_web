@@ -150,4 +150,6 @@ def give_ans4():
     check(3)
     return redirect(url_for('main'))
 
-app.run()
+
+if __name__ == '__main__':
+    app.run()
